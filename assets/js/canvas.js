@@ -52,7 +52,12 @@ var Canvas = {
     y : null,
 
     /**
-     * Initialized library
+     * @type String
+     */
+    action : null,
+
+    /**
+     * Initialized snake
      */
     init : function() {
 
@@ -64,7 +69,7 @@ var Canvas = {
         /* set canvas size */
         Canvas.resize();
         /* set frame per second */
-        Canvas.setFrame(500);
+        Canvas.setFrame(100);
         /* set cell size */
         Canvas.setCell(10);
 
@@ -82,6 +87,8 @@ var Canvas = {
         this.snake = createSnake();
         this.x = this.snake[0].x;
         this.y = this.snake[0].y;
+        /* default action */
+        this.action = 'right';
 
         setInterval(Canvas.draw, Canvas.getFrame());
 
@@ -93,7 +100,23 @@ var Canvas = {
     draw : function() {
 
         drawBackground(Canvas.ctx,Canvas.width,Canvas.height);
-        Canvas.x++;
+
+        var action = Canvas.getAction();
+
+        switch (action) {
+            case "right":
+                Canvas.x++;
+                break;
+            case "left":
+                Canvas.x--;
+                break;
+            case "up":
+                Canvas.y--;
+                break;
+            case "down":
+                Canvas.y++;
+                break;
+        }
         Canvas.snake.pop();
         Canvas.snake.unshift({ x : Canvas.x, y : Canvas.y });
 
@@ -134,6 +157,22 @@ var Canvas = {
      */
     setCell : function(cell) {
         this.cell = parseInt(cell);
+    },
+
+    /**
+     * Set action
+     * @param action
+     */
+    setAction : function(action) {
+        this.action = action;
+    },
+
+    /**
+     * Get action
+     * @returns {String}
+     */
+    getAction : function() {
+        return this.action;
     },
 
     /**
@@ -204,3 +243,5 @@ function drawBackground(ctx,x,y) {
     ctx.strokeStyle = "green";
     ctx.strokeRect(0, 0, x, y);
 }
+
+
