@@ -26,22 +26,20 @@
 
             var event = event || window.event;
             var e = event.keyCode;
+            var action = Canvas.getAction();
 
-            switch (e) {
-                case 39 :
-                    Canvas.setAction('right');
-                    break;
-                case 37 :
-                    Canvas.setAction('left');
-                    break
-                case 38 :
-                    Canvas.setAction('up');
-                    break;
-                case 40 :
-                    Canvas.setAction('down');
-                    break;
+            if (e === 39 && action !== 'left') {
+                Canvas.setAction('right');
             }
-
+            else if (e === 37 && action !== 'right') {
+                Canvas.setAction('left');
+            }
+            else if (e === 38 && action !== 'down') {
+                Canvas.setAction('up');
+            }
+            else if (e === 40 && action !== 'up') {
+                Canvas.setAction('down');
+            }
         }
     }
 

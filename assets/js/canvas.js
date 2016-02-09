@@ -1,5 +1,5 @@
 /**
- * Load main resources
+ * Load canvas
  * @author Władysław Hrynczyszyn <vladyslav.gryn@gmail.com>
  * @date 27.01.2016
  */
@@ -57,14 +57,21 @@ var Canvas = {
     action : null,
 
     /**
+     * @type Number
+     */
+    id : null,
+
+    /**
      * Initialized snake
      */
     init : function() {
 
         this.canvas = document.getElementById("canvas");
 
-        this.width = window.screen.availWidth - 20;
-        this.height = window.screen.availHeight - 100;
+        //this.width = window.screen.availWidth - 20;
+        this.width = 500;
+        this.height = 500;
+        //this.height = window.screen.availHeight - 100;
 
         /* set canvas size */
         Canvas.resize();
@@ -90,7 +97,7 @@ var Canvas = {
         /* default action */
         this.action = 'right';
 
-        setInterval(Canvas.draw, Canvas.getFrame());
+        this.id = setInterval(Canvas.draw, Canvas.getFrame());
 
     },
 
@@ -117,6 +124,16 @@ var Canvas = {
                 Canvas.y++;
                 break;
         }
+
+        if (Canvas.x === -1 || Canvas.y === -1 || Canvas.x === Canvas.width/Canvas.cell ||  Canvas.y === Canvas.height/Canvas.cell ) {
+            clearInterval(Canvas.id);
+            Canvas.ctx.font = "48px Serif"
+            Canvas.ctx.strokeStyle = "red"
+            Canvas.ctx.textAlign = "center";
+            Canvas.ctx.strokeText("GAMEOVER",250,250)
+            return;
+        }
+
         Canvas.snake.pop();
         Canvas.snake.unshift({ x : Canvas.x, y : Canvas.y });
 
