@@ -5,7 +5,8 @@
     <title>Snake Game</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <script type="text/javascript" src="assets/js/canvas.js"></script>
+    <script type="text/javascript" src="assets/js/texture.js"></script>
+    <script type="text/javascript" src="assets/js/game.js"></script>
 </head>
 <body>
 
@@ -17,30 +18,36 @@
 <script>
 
     window.onload = function() {
+
         /**
-         * Initialize canvas
+         * Initialize texture
          */
-        Canvas.init()
+        var canvas = document.getElementById("canvas");
+        var snake = new Game(500, 500, canvas, 10);
+        snake.draw();
+        console.log(snake.getCell());
 
-        document.onkeydown = function(event) {
-
-            var event = event || window.event;
-            var e = event.keyCode;
-            var action = Canvas.getAction();
-
-            if (e === 39 && action !== 'left') {
-                Canvas.setAction('right');
-            }
-            else if (e === 37 && action !== 'right') {
-                Canvas.setAction('left');
-            }
-            else if (e === 38 && action !== 'down') {
-                Canvas.setAction('up');
-            }
-            else if (e === 40 && action !== 'up') {
-                Canvas.setAction('down');
-            }
-        }
+//        Canvas.init()
+//
+//        document.onkeydown = function(event) {
+//
+//            var event = event || window.event;
+//            var e = event.keyCode;
+//            var action = Canvas.getAction();
+//
+//            if (e === 39 && action !== 'left') {
+//                Canvas.setAction('right');
+//            }
+//            else if (e === 37 && action !== 'right') {
+//                Canvas.setAction('left');
+//            }
+//            else if (e === 38 && action !== 'down') {
+//                Canvas.setAction('up');
+//            }
+//            else if (e === 40 && action !== 'up') {
+//                Canvas.setAction('down');
+//            }
+//        }
     }
 
 
