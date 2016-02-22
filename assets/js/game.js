@@ -18,6 +18,8 @@ function Game(width, height, cell, canvas, frame) {
     Texture.apply(this, arguments);
     this.cell = cell;
     this.frame = frame;
+    this.action = 'right';
+    this.snake = [];
 }
 /**
  *  Extend object Texutre
@@ -37,8 +39,6 @@ Game.prototype.start = function() {
     this.x = this.snake[0].x;
     this.y = this.snake[0].y;
 
-    /* default action */
-    this.action = 'right';
     this.id = setInterval(this.move.bind(this), this.frame);
 };
 
@@ -48,6 +48,27 @@ Game.prototype.start = function() {
 Game.prototype.move = function() {
 
     Texture.prototype.drawBackground.call(this);
+
+    this.snakeAction();
+
+    if (this.x === -1 || this.y === -1 || this.x === this.width/this.cell ||  this.y === this.height/this.cell || this.collision()) {
+        clearInterval(this.id);
+        return;
+    }
+
+    this.snake.pop();
+    this.snake.unshift({ x : this.x, y : this.y });
+
+    for (var i = 0; i < this.snake.length; i++) {
+        Texture.prototype.drawSnake.call(this, this.snake[i].x, this.snake[i].y);
+    }
+
+};
+
+/**
+ * Event listener
+ */
+Game.prototype.snakeAction = function() {
 
     var action = this.getAction();
     switch (action) {
@@ -64,20 +85,21 @@ Game.prototype.move = function() {
             this.y++;
             break;
     }
+};
 
-    if (this.x === -1 || this.y === -1 || this.x === this.width/this.cell ||  this.y === this.height/this.cell ) {
-        clearInterval(this.id);
-        return;
-    }
-
-    this.snake.pop();
-    this.snake.unshift({ x : this.x, y : this.y });
+/**
+ * Check collision
+ * @returns {boolean}
+ */
+Game.prototype.collision = function() {
 
     for (var i = 0; i < this.snake.length; i++) {
-        Texture.prototype.drawSnake.call(this, this.snake[i].x, this.snake[i].y);
+        if (this.snake[i].x === this.x && this.snake[i].y === this.y) {
+            return true;
+        }
     }
-
-};
+    return false;
+}
 
 /**
  * Set action
@@ -101,7 +123,7 @@ Game.prototype.getAction = function() {
  */
 function createSnake() {
 
-    var length = 3;
+    var length = 10;
     var snake = [];
 
     for ( var i = length - 1; i >= 0; i--) {
