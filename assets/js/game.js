@@ -39,6 +39,8 @@ Game.prototype.start = function() {
     this.x = this.snake[0].x;
     this.y = this.snake[0].y;
 
+    Texture.prototype.generateFood.call(this);
+
     this.id = setInterval(this.move.bind(this), this.frame);
 };
 
@@ -56,13 +58,22 @@ Game.prototype.move = function() {
         return;
     }
 
-    this.snake.pop();
+    /* check if snake eat food */
+    if (this.food.x == this.x && this.food.y == this.y ) {
+        Texture.prototype.generateFood.call(this);
+    }
+    else {
+        this.snake.pop();
+    }
+    /* add new cell */
     this.snake.unshift({ x : this.x, y : this.y });
 
+    /* draw snake */
     for (var i = 0; i < this.snake.length; i++) {
-        Texture.prototype.drawSnake.call(this, this.snake[i].x, this.snake[i].y);
+        Texture.prototype.drawCell.call(this, this.snake[i].x, this.snake[i].y);
     }
-
+    /* draw food */
+    Texture.prototype.drawCell.call(this, this.food.x , this.food.y);
 };
 
 /**
@@ -123,7 +134,7 @@ Game.prototype.getAction = function() {
  */
 function createSnake() {
 
-    var length = 10;
+    var length = 3;
     var snake = [];
 
     for ( var i = length - 1; i >= 0; i--) {

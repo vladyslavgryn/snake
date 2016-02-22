@@ -17,6 +17,10 @@ function Texture(width, height, cell, canvas) {
     this.height = height;
     this.cell = cell;
     this.canvas = canvas;
+    this.food = {
+        x : null,
+        t : null
+    };
 }
 
 /**
@@ -51,7 +55,7 @@ Texture.prototype.drawBackground = function() {
  * @param x
  * @param y
  */
-Texture.prototype.drawSnake = function(x, y) {
+Texture.prototype.drawCell = function(x, y) {
 
     this.ctx.fillStyle = "green";
     this.ctx.fillRect(x * this.cell, y * this.cell, this.cell, this.cell);
@@ -59,6 +63,18 @@ Texture.prototype.drawSnake = function(x, y) {
     this.ctx.strokeRect(x * this.cell, y * this.cell, this.cell, this.cell);
 
 };
+
+/**
+ * Generate food
+ */
+Texture.prototype.generateFood = function() {
+
+    var x = Math.round(Math.random()*(this.width - this.cell) / this.cell);
+    var y = Math.round(Math.random()*(this.height - this.cell) / this.cell);
+
+    this.food = { x : x, y : y};
+
+}
 
 /**
  * Get current size
