@@ -55,9 +55,10 @@ Texture.prototype.drawBackground = function() {
  * @param x
  * @param y
  */
-Texture.prototype.drawCell = function(x, y) {
+Texture.prototype.drawCell = function(x, y, color) {
 
-    this.ctx.fillStyle = "green";
+    color = color || "green";
+    this.ctx.fillStyle = color;
     this.ctx.fillRect(x * this.cell, y * this.cell, this.cell, this.cell);
     this.ctx.strokeStyle = "white";
     this.ctx.strokeRect(x * this.cell, y * this.cell, this.cell, this.cell);
