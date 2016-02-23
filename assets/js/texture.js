@@ -24,7 +24,7 @@ function Texture(width, height, cell, canvas) {
 }
 
 /**
- * Draw
+ * Set canvas size
  */
 Texture.prototype.init = function() {
 
@@ -46,12 +46,12 @@ Texture.prototype.drawBackground = function() {
 
     this.ctx.fillStyle = "white";
     this.ctx.fillRect(0, 0, this.width, this.height);
-    this.ctx.strokeStyle = "green";
+    this.ctx.strokeStyle = "black";
     this.ctx.strokeRect(0, 0, this.width, this.height);
 };
 
 /**
- * Draw snake
+ * Draw cell
  * @param x
  * @param y
  */
@@ -65,7 +65,7 @@ Texture.prototype.drawCell = function(x, y) {
 };
 
 /**
- * Generate food
+ * Generate food position
  */
 Texture.prototype.generateFood = function() {
 

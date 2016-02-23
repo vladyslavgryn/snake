@@ -23,7 +23,7 @@
          * Initialize texture
          */
         var canvas = document.getElementById("canvas");
-        var snake = new Game(500, 500, 10, canvas, 60);
+        var snake = new Game(500, 500, 10, canvas, 100);
 
         snake.init();
         snake.start();
@@ -45,6 +45,11 @@
             }
             else if (e === 40 && action !== 'up') {
                 snake.setAction('down');
+            }
+
+            /* start new game */
+            if (snake.gameOver && e === 32) {
+                snake.start();
             }
         }
     }

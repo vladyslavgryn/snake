@@ -18,7 +18,6 @@ function Game(width, height, cell, canvas, frame) {
     Texture.apply(this, arguments);
     this.cell = cell;
     this.frame = frame;
-    this.action = 'right';
     this.snake = [];
 }
 /**
@@ -32,10 +31,15 @@ Game.prototype.constructor = Game;
  */
 Game.prototype.start = function() {
 
+    this.gameOver = false;
+
     /* get snake position array */
     this.snake = createSnake();
 
-    /* set start position */
+    /* set default snake action */
+    this.action = 'right';
+
+    /* set snake start position */
     this.x = this.snake[0].x;
     this.y = this.snake[0].y;
 
@@ -55,6 +59,7 @@ Game.prototype.move = function() {
 
     if (this.x === -1 || this.y === -1 || this.x === this.width/this.cell ||  this.y === this.height/this.cell || this.collision()) {
         clearInterval(this.id);
+        this.gameOver = true;
         return;
     }
 
