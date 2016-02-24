@@ -46,7 +46,7 @@ Texture.prototype.drawBackground = function() {
 
     this.ctx.fillStyle = "white";
     this.ctx.fillRect(0, 0, this.width, this.height);
-    this.ctx.strokeStyle = "black";
+    this.ctx.strokeStyle = "#2E9AFE";
     this.ctx.strokeRect(0, 0, this.width, this.height);
 };
 
@@ -57,7 +57,7 @@ Texture.prototype.drawBackground = function() {
  */
 Texture.prototype.drawCell = function(x, y, color) {
 
-    color = color || "green";
+    color = color || "#2E9AFE";
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x * this.cell, y * this.cell, this.cell, this.cell);
     this.ctx.strokeStyle = "white";
