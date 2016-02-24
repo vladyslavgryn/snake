@@ -23,7 +23,7 @@
         <div class="alert alert-success">
             Use <code>space</code> to restart game
         </div>
-        <button type="button" class="btn btn-success btn-lg btn-block">Start game</button>
+        <button id="startGame" type="button" class="btn btn-success btn-lg btn-block">Start game</button>
         <canvas id="canvas"></canvas>
     </div>
 
@@ -46,9 +46,20 @@
          */
         var canvas = document.getElementById("canvas");
         var snake = new Game(500, 500, 10, canvas, 80);
+        var startButton = document.getElementById("startGame");
+        var alertDiv = document.getElementsByClassName("alert-success");
+        var startGame = false;
 
-        snake.init();
-        snake.start();
+        startButton.addEventListener('click', function() {
+            if (!startGame) {
+                snake.init();
+                snake.start();
+                startGame = true;
+                alertDiv[0].style.display = 'none';
+                alertDiv[1].style.display = 'none';
+                startButton.style.display = 'none';
+            }
+        });
 
         document.onkeydown = function(event) {
 

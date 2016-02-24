@@ -78,7 +78,7 @@ Game.prototype.move = function() {
         Texture.prototype.drawCell.call(this, this.snake[i].x, this.snake[i].y);
     }
     /* draw food */
-    Texture.prototype.drawCell.call(this, this.food.x, this.food.y, "red");
+    Texture.prototype.drawCell.call(this, this.food.x, this.food.y, "green");
 };
 
 /**
