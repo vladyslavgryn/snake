@@ -45,7 +45,7 @@
          * Initialize texture
          */
         var canvas = document.getElementById("canvas");
-        var snake = new Game(500, 500, 10, canvas, 80);
+        var snake = new Game(500, 500, 10, canvas, 100);
         var startButton = document.getElementById("startGame");
         var alertDiv = document.getElementsByClassName("alert-success");
         var startGame = false;
@@ -65,18 +65,17 @@
 
             var event = event || window.event;
             var e = event.keyCode;
-            var action = snake.getAction();
 
-            if (e === 39 && action !== 'left') {
+            if (e === 39 && snake.globalAction !== 'left') {
                 snake.setAction('right');
             }
-            else if (e === 37 && action !== 'right') {
+            else if (e === 37 && snake.globalAction !== 'right') {
                 snake.setAction('left');
             }
-            else if (e === 38 && action !== 'down') {
+            else if (e === 38 && snake.globalAction !== 'down') {
                 snake.setAction('up');
             }
-            else if (e === 40 && action !== 'up') {
+            else if (e === 40 && snake.globalAction !== 'up') {
                 snake.setAction('down');
             }
 

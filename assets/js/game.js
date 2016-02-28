@@ -44,7 +44,7 @@ Game.prototype.start = function() {
     this.y = this.snake[0].y;
 
     Texture.prototype.generateFood.call(this);
-
+    Texture.prototype.drawBackground.call(this);
     this.id = setInterval(this.move.bind(this), this.frame);
 };
 
@@ -54,6 +54,7 @@ Game.prototype.start = function() {
 Game.prototype.move = function() {
 
     Texture.prototype.drawBackground.call(this);
+
 
     this.snakeAction();
 
@@ -86,8 +87,8 @@ Game.prototype.move = function() {
  */
 Game.prototype.snakeAction = function() {
 
-    var action = this.getAction();
-    switch (action) {
+    this.globalAction = this.getAction();
+    switch (this.globalAction) {
         case "right":
             this.x++;
             break;
