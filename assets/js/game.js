@@ -59,6 +59,7 @@ Game.prototype.move = function() {
 
     if (this.x === -1 || this.y === -1 || this.x === this.width/this.cell ||  this.y === this.height/this.cell || this.collision()) {
         clearInterval(this.id);
+        Texture.prototype.drawText.call(this, "Game Over", this.width/2, this.height/2, "22px Comic Sans MS", "red");
         this.gameOver = true;
         return;
     }
@@ -79,6 +80,11 @@ Game.prototype.move = function() {
     }
     /* draw food */
     Texture.prototype.drawCell.call(this, this.food.x, this.food.y, "#c7254e");
+
+    /* draw snake lenght */
+    var lenght = "Length : " + this.snake.length;
+    Texture.prototype.drawText.call(this, lenght, 5, this.height -5);
+
 };
 
 /**
