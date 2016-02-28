@@ -2,6 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Snake Game</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
@@ -16,18 +17,45 @@
             <h1>JavaScript Snake Game</h1>
         </div>
 
-        <div class="alert alert-success">
-            Use <code>Left</code> <code>Right</code> <code>Up</code> <code>Down</code> to move snake
-        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <canvas id="canvas"></canvas>
+            </div>
 
-        <div class="alert alert-success">
-            Use <code>space</code> to restart game
+            <div class="col-lg-5">
+
+                <div class="alert alert-success">
+                    Use <code>Left</code> <code>Right</code> <code>Up</code> <code>Down</code> to move snake
+                </div>
+
+                <div class="alert alert-success">
+                    Use <code>space</code> to restart game
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Score</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>102</td>
+                                <td>20.04.2016</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-danger btn-block">Clear</button>
+            </div>
         </div>
-        <button id="startGame" type="button" class="btn btn-success btn-lg btn-block">Start game</button>
-        <canvas id="canvas"></canvas>
+        <div class="push"></div>
     </div>
 
-    <div id="footer">
+    <div class="footer">
         <h5>
             <small>
                 <p>&#9426 2016 vladyslavgryn</p>
@@ -46,20 +74,8 @@
          */
         var canvas = document.getElementById("canvas");
         var snake = new Game(500, 500, 10, canvas, 100);
-        var startButton = document.getElementById("startGame");
-        var alertDiv = document.getElementsByClassName("alert-success");
-        var startGame = false;
 
-        startButton.addEventListener('click', function() {
-            if (!startGame) {
-                snake.init();
-                snake.start();
-                startGame = true;
-                alertDiv[0].style.display = 'none';
-                alertDiv[1].style.display = 'none';
-                startButton.style.display = 'none';
-            }
-        });
+        snake.init();
 
         document.onkeydown = function(event) {
 

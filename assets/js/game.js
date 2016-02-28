@@ -19,6 +19,7 @@ function Game(width, height, cell, canvas, frame) {
     this.cell = cell;
     this.frame = frame;
     this.snake = [];
+    this.gameOver = true;
 }
 /**
  *  Extend object Texutre
@@ -44,7 +45,6 @@ Game.prototype.start = function() {
     this.y = this.snake[0].y;
 
     Texture.prototype.generateFood.call(this);
-    Texture.prototype.drawBackground.call(this);
     this.id = setInterval(this.move.bind(this), this.frame);
 };
 
@@ -54,7 +54,6 @@ Game.prototype.start = function() {
 Game.prototype.move = function() {
 
     Texture.prototype.drawBackground.call(this);
-
 
     this.snakeAction();
 
@@ -79,7 +78,7 @@ Game.prototype.move = function() {
         Texture.prototype.drawCell.call(this, this.snake[i].x, this.snake[i].y);
     }
     /* draw food */
-    Texture.prototype.drawCell.call(this, this.food.x, this.food.y, "green");
+    Texture.prototype.drawCell.call(this, this.food.x, this.food.y, "#c7254e");
 };
 
 /**
@@ -116,7 +115,7 @@ Game.prototype.collision = function() {
         }
     }
     return false;
-}
+};
 
 /**
  * Set action
