@@ -38,7 +38,7 @@ Texture.prototype.init = function() {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.drawBackground();
-    this.drawText("Press space to start new game", this.width/2, this.height/2);
+    this.drawText(this.width/2, this.height/2, "", "", "", "Press space to start new game");
 };
 
 /**
@@ -48,7 +48,7 @@ Texture.prototype.drawBackground = function() {
 
     this.ctx.fillStyle = "white";
     this.ctx.fillRect(0, 0, this.width, this.height);
-    this.ctx.strokeStyle = "#76bf5a";
+    this.ctx.strokeStyle = "grey";
     this.ctx.strokeRect(0, 0, this.width, this.height);
 };
 
@@ -80,16 +80,22 @@ Texture.prototype.generateFood = function() {
 };
 /**
  * Draw snake length
- * @param length
+ * @param x
+ * @param y
+ * @param size
+ * @param color
+ * @param position
+ * @param text
  */
-Texture.prototype.drawText = function(text, x, y, size, color) {
-    size = size || "15px Comic Sans MS";
+Texture.prototype.drawText = function(x, y, size, color, position, text) {
+    size = size || "26px GeosansLight";
     color = color || "#539339";
+    position = position || "center";
 
     this.ctx.font = size;
-    this.ctx.textAlign = "center";
-    this.ctx.fillStyle = color;
-    this.ctx.fillText(text, x, y);
+    this.ctx.textAlign = position;
+    this.ctx.strokeStyle = color;
+    this.ctx.strokeText(text, x, y);
 }
 
 /**

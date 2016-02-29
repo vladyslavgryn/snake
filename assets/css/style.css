@@ -16,3 +16,8 @@ body > .container {
     padding: 0;
     margin:  auto;
 }
+
+@font-face {
+    font-family: 'GeosansLight';
+    src: url(../fonts/GeosansLight-Oblique.ttf);
+}

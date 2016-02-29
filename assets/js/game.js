@@ -58,10 +58,7 @@ Game.prototype.move = function() {
     this.snakeAction();
 
     if (this.x === -1 || this.y === -1 || this.x === this.width/this.cell ||  this.y === this.height/this.cell || this.collision()) {
-        clearInterval(this.id);
-        Texture.prototype.drawText.call(this, "Game Over", this.width/2, this.height/2, "22px Comic Sans MS", "red");
         this.gameOver = true;
-        return;
     }
 
     /* check if snake eat food */
@@ -83,7 +80,13 @@ Game.prototype.move = function() {
 
     /* draw snake lenght */
     var lenght = "Length : " + this.snake.length;
-    Texture.prototype.drawText.call(this, lenght, 5, this.height -5);
+    Texture.prototype.drawText.call(this, 5, this.height-5, "13px GeosansLight", "grey", "left", lenght);
+
+    if (this.gameOver) {
+        clearInterval(this.id);
+        Texture.prototype.drawText.call(this, this.width/2, this.height/2, "", "red", "", "Game Over");
+        return;
+    }
 
 };
 
@@ -138,6 +141,13 @@ Game.prototype.setAction = function(action) {
 Game.prototype.getAction = function() {
     return this.action;
 };
+/**
+ * Get game result
+ * @returns {Number}
+ */
+Game.prototype.getResult = function() {
+    return this.snake.length;
+}
 
 /**
  * Create snake with three cell
